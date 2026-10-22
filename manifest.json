@@ -1,0 +1,9 @@
+{
+  "name": "Minhas Publis — Controle financeiro",
+  "short_name": "Minhas Publis",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#faf6f4",
+  "theme_color": "#f8f3f1",
+  "description": "Controle financeiro delicado para criadoras de conteúdo."
+}

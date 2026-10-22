@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f8f3f1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Minhas Publis">
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<title>Minhas Publis · Controle financeiro</title>
+<style>
+:root{--bg:#faf6f4;--paper:#fff;--ink:#342b30;--muted:#8a7b82;--rose:#bd8197;--rose-dark:#965c73;--pink:#f3e2e8;--sage:#dce8dc;--line:#efe5e4;--gold:#e8d3a9;--shadow:0 8px 24px #68404b0d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15px;padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+header{padding:24px 18px 18px;background:linear-gradient(135deg,#f8e9ed,#fbf6ef);border-radius:0 0 28px 28px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.eyebrow{font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--rose-dark);font-weight:700}h1{font-family:Georgia,serif;font-size:29px;line-height:1.1;margin:7px 0 5px;font-weight:500}.sub{color:#826f77;font-size:13px}.round-icon{border:0;background:#ffffffb8;border-radius:16px;width:44px;height:44px;font-size:20px}
+main{max-width:760px;margin:auto;padding:0 15px}.monthrow{display:flex;align-items:center;gap:9px;margin:18px 0}.monthrow select{flex:1;min-width:0}.field,select,textarea,input{font:inherit;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:13px;padding:12px;width:100%;outline:none}label{display:block;font-size:12px;font-weight:650;color:#78666e;margin:0 0 6px}.field:focus,select:focus,input:focus,textarea:focus{border-color:#ca9bad;box-shadow:0 0 0 3px #f4e4ea}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:var(--paper);padding:15px;border-radius:20px;box-shadow:var(--shadow);border:1px solid #f4eaea;min-width:0}.stat.wide{grid-column:span 2;background:#fffaf9}.stat .label{font-size:12px;color:var(--muted);margin-bottom:8px}.amount{font-size:clamp(18px,5vw,24px);font-weight:750;letter-spacing:-.6px;overflow-wrap:anywhere}.stat small{display:block;color:var(--muted);font-size:11px;margin-top:5px}.rose{color:var(--rose-dark)}.green{color:#557b60}.orange{color:#a36f3d}
+.sectionhead{display:flex;justify-content:space-between;align-items:center;margin:25px 2px 12px}.sectionhead h2{font-family:Georgia,serif;font-size:21px;font-weight:500;margin:0}.count{font-size:12px;color:var(--muted)}
+.btn{border:0;border-radius:14px;padding:12px 15px;font-weight:700;font-size:13px;cursor:pointer}.primary{background:var(--rose);color:#fff}.secondary{background:var(--pink);color:var(--rose-dark)}.ghost{background:#fff;border:1px solid var(--line);color:var(--ink)}.danger{background:#f9e7e5;color:#a34f4c}.full{width:100%}
+.entry{background:#fff;border:1px solid #f1e7e7;border-radius:20px;padding:15px;margin:10px 0;box-shadow:var(--shadow)}.entrytop{display:flex;gap:12px;justify-content:space-between;align-items:flex-start}.brand{font-weight:750;font-size:16px;overflow-wrap:anywhere}.meta{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.45}.price{font-weight:800;font-size:17px;white-space:nowrap}.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.chip{font-size:11px;border-radius:99px;padding:6px 9px;background:#f6edf0;color:#80556a}.chip.paid{background:#e6f1e7;color:#477452}.chip.pending{background:#fbefdc;color:#986c2e}.actions{display:flex;gap:8px;margin-top:13px}.actions button{flex:1;padding:9px 10px}
+.empty{text-align:center;background:#fff;border:1px dashed #e7d5db;border-radius:20px;padding:28px 18px;color:var(--muted);line-height:1.5}.empty .emoji{font-size:32px;margin-bottom:8px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:22px;padding:16px;margin:12px 0;box-shadow:var(--shadow)}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.span2{grid-column:span 2}.formactions{display:flex;gap:9px;margin-top:14px}.formactions button{flex:1}
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:9px}.tools button{min-height:45px}.note{font-size:12px;color:var(--muted);line-height:1.5;margin-top:12px}
+footer{text-align:center;color:#9a8990;font-size:11px;padding:25px 15px 10px}
+.hidden{display:none!important}
+@media(min-width:600px){header{padding:30px calc((100% - 720px)/2) 22px}main{padding:0 20px}.cards{grid-template-columns:repeat(4,1fr)}.stat.wide{grid-column:span 1}.formgrid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<header><div class="top"><div><div class="eyebrow">Seu financeiro criativo</div><h1>Minhas Publis <span style="font-size:20px">✿</span></h1><div class="sub">Um jeitinho leve de cuidar do seu trabalho.</div></div><button class="round-icon" id="backupTop" aria-label="Exportar backup">↗</button></div></header>
+<main>
+<div class="monthrow"><label for="month" style="margin:0;white-space:nowrap">Visualizar</label><select id="month" aria-label="Mês"></select><select id="year" aria-label="Ano" style="max-width:112px"></select></div>
+<section class="cards" aria-label="Resumo financeiro">
+<div class="stat wide"><div class="label">Contratado no mês</div><div class="amount" id="monthTotal">R$ 0,00</div><small>Todos os trabalhos do mês</small></div>
+<div class="stat"><div class="label">Total contratado</div><div class="amount" id="allTotal">R$ 0,00</div><small>Todos os registros</small></div>
+<div class="stat"><div class="label">Já recebi</div><div class="amount green" id="receivedTotal">R$ 0,00</div><small>Pagamentos confirmados</small></div>
+<div class="stat"><div class="label">A receber</div><div class="amount orange" id="pendingTotal">R$ 0,00</div><small>Valores pendentes</small></div>
+</section>
+<div class="sectionhead"><h2 id="listTitle">Minhas campanhas</h2><span class="count" id="count">0 registros</span></div>
+<div id="entries"></div>
+<div class="sectionhead"><h2 id="formTitle">Adicionar publi</h2><span class="count">✧ novo trabalho</span></div>
+<form id="pubForm" class="panel">
+<input id="editId" type="hidden">
+<div class="formgrid">
+<div class="span2"><label for="brand">Marca ou cliente *</label><input id="brand" required maxlength="100" placeholder="Ex.: Marca de beleza"></div>
+<div><label for="value">Valor (R$) *</label><input id="value" required inputmode="decimal" placeholder="350,00"></div>
+<div><label for="date">Data da campanha *</label><input id="date" required type="date"></div>
+<div class="span2"><label for="delivery">Descrição da entrega *</label><input id="delivery" required maxlength="180" placeholder="Ex.: 1 Reels + 3 Stories, UGC, provador"></div>
+<div class="span2"><label for="status">Situação do pagamento</label><select id="status"><option value="pending">Pendente</option><option value="paid">Recebido</option></select></div>
+</div>
+<div class="formactions"><button class="btn primary" id="saveBtn" type="submit">♡ Salvar publi</button><button class="btn ghost hidden" id="cancelEdit" type="button">Cancelar</button></div>
+</form>
+<div class="sectionhead"><h2>Seus registros</h2><span class="count">backup & segurança</span></div>
+<div class="panel">
+<div class="tools"><button class="btn secondary" id="exportBtn">↓ Exportar backup</button><button class="btn ghost" id="importBtn">↑ Restaurar backup</button></div>
+<input id="importFile" type="file" accept=".json,application/json" class="hidden">
+<div class="note">Seus registros ficam salvos neste navegador, neste aparelho. Exporte um backup JSON regularmente e guarde-o no app Arquivos/iCloud Drive. Se limpar os dados do navegador ou trocar de aparelho, restaure o backup. Para sincronizar automaticamente entre aparelhos, será necessário configurar um banco de dados online.</div>
+</div>
+<footer>Feito com carinho para organizar suas conquistas ✿<br>Minhas Publis · Controle financeiro</footer>
+</main>
+<script>
+const KEY='minhas-publis-v1';
+const $=id=>document.getElementById(id);
+const fmt=n=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(n||0);
+const months=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+let records=[];
+try{records=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(records))records=[];}catch(e){records=[];}
+const now=new Date();
+$('month').innerHTML=months.map((m,i)=>`<option value="${i}">${m}</option>`).join('');
+$('month').value=now.getMonth();
+const years=new Set([now.getFullYear(),...records.map(r=>Number((r.date||'').slice(0,4))).filter(Boolean)]);
+for(let y=now.getFullYear()-5;y<=now.getFullYear()+5;y++) years.add(y);
+$('year').innerHTML=[...years].sort((a,b)=>b-a).map(y=>`<option value="${y}">${y}</option>`).join('');
+$('year').value=now.getFullYear();
+$('date').value=now.toISOString().slice(0,10);
+function persist(){localStorage.setItem(KEY,JSON.stringify(records));render();}
+function selectedRecords(){const m=String(Number($('month').value)+1).padStart(2,'0'),y=String($('year').value);return records.filter(r=>r.date&&r.date.slice(0,4)===y&&r.date.slice(5,7)===m).sort((a,b)=>b.date.localeCompare(a.date));}
+function amount(r){return Number(r.value)||0;}
+function render(){
+ const monthRows=selectedRecords(), total=rows=>rows.reduce((s,r)=>s+amount(r),0);
+ $('monthTotal').textContent=fmt(total(monthRows));$('allTotal').textContent=fmt(total(records));
+ $('receivedTotal').textContent=fmt(total(records.filter(r=>r.status==='paid')));
+ $('pendingTotal').textContent=fmt(total(records.filter(r=>r.status!=='paid')));
+ $('listTitle').textContent=`Publis de ${months[Number($('month').value)]} de ${$('year').value}`;
+ $('count').textContent=`${monthRows.length} ${monthRows.length===1?'registro':'registros'}`;
+ const wrap=$('entries');wrap.innerHTML='';
+ if(!monthRows.length){wrap.innerHTML='<div class="empty"><div class="emoji">🌷</div><strong>Nenhuma publi por aqui ainda</strong><br>Adicione sua primeira campanha logo abaixo.</div>';return;}
+ monthRows.forEach(r=>{
+ const el=document.createElement('article');el.className='entry';
+ const top=document.createElement('div');top.className='entrytop';
+ const left=document.createElement('div');const brand=document.createElement('div');brand.className='brand';brand.textContent=r.brand;
+ const meta=document.createElement('div');meta.className='meta';meta.textContent=new Date(r.date+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'})+' · '+r.delivery;
+ left.append(brand,meta);const price=document.createElement('div');price.className='price';price.textContent=fmt(amount(r));top.append(left,price);
+ const chips=document.createElement('div');chips.className='chips';const chip=document.createElement('span');chip.className='chip '+(r.status==='paid'?'paid':'pending');chip.textContent=r.status==='paid'?'✓ Recebido':'◷ Pendente';chips.append(chip);
+ const actions=document.createElement('div');actions.className='actions';
+ const toggle=document.createElement('button');toggle.className='btn '+(r.status==='paid'?'ghost':'secondary');toggle.textContent=r.status==='paid'?'Marcar pendente':'Marcar recebido';toggle.onclick=()=>{r.status=r.status==='paid'?'pending':'paid';persist();};
+ const edit=document.createElement('button');edit.className='btn ghost';edit.textContent='Editar';edit.onclick=()=>startEdit(r);
+ const del=document.createElement('button');del.className='btn danger';del.textContent='Excluir';del.onclick=()=>{if(confirm(`Excluir a publi de "${r.brand}"? Esta ação não pode ser desfeita.`)){records=records.filter(x=>x.id!==r.id);persist();}};
+ actions.append(toggle,edit,del);el.append(top,chips,actions);wrap.append(el);
+ });
+}
+function parseValue(s){return Number(String(s).trim().replace(/\s/g,'').replace(/^R\$/i,'').replace(/\./g,'').replace(',','.'));}
+function resetForm(){ $('pubForm').reset();$('editId').value='';$('date').value=now.toISOString().slice(0,10);$('status').value='pending';$('formTitle').textContent='Adicionar publi';$('saveBtn').textContent='♡ Salvar publi';$('cancelEdit').classList.add('hidden');}
+function startEdit(r){$('editId').value=r.id;$('brand').value=r.brand;$('value').value=amount(r).toFixed(2).replace('.',',');$('date').value=r.date;$('delivery').value=r.delivery;$('status').value=r.status;$('formTitle').textContent='Editar publi';$('saveBtn').textContent='Salvar alterações';$('cancelEdit').classList.remove('hidden');$('pubForm').scrollIntoView({behavior:'smooth',block:'start'});}
+$('pubForm').addEventListener('submit',e=>{e.preventDefault();const v=parseValue($('value').value);if(!Number.isFinite(v)||v<0){alert('Informe um valor válido.');return;}const id=$('editId').value;const item={id:id||((crypto.randomUUID&&crypto.randomUUID())||String(Date.now())),brand:$('brand').value.trim(),value:v,date:$('date').value,delivery:$('delivery').value.trim(),status:$('status').value};if(id){records=records.map(r=>r.id===id?item:r);}else records.push(item);$('month').value=Number(item.date.slice(5,7))-1;$('year').value=Number(item.date.slice(0,4));if(!$('year').querySelector(`option[value="${item.date.slice(0,4)}"]`)){$('year').insertAdjacentHTML('afterbegin',`<option value="${item.date.slice(0,4)}">${item.date.slice(0,4)}</option>`);$('year').value=item.date.slice(0,4);}persist();resetForm();});
+$('cancelEdit').onclick=resetForm;$('month').onchange=render;$('year').onchange=render;
+function exportData(){const blob=new Blob([JSON.stringify({app:'Minhas Publis',version:1,exportedAt:new Date().toISOString(),records},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`backup-minhas-publis-${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(url);}
+$('exportBtn').onclick=exportData;$('backupTop').onclick=exportData;
+$('importBtn').onclick=()=>$('importFile').click();
+$('importFile').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const data=JSON.parse(await file.text());const incoming=Array.isArray(data)?data:data.records;if(!Array.isArray(incoming)||!incoming.every(r=>r&&typeof r.brand==='string'&&typeof r.date==='string'&&Number.isFinite(Number(r.value))))throw Error('Formato inválido');if(!confirm(`Restaurar ${incoming.length} registros? Isso substituirá os registros atuais neste aparelho.`))return;records=incoming.map(r=>({id:String(r.id||((crypto.randomUUID&&crypto.randomUUID())||Date.now()+Math.random())),brand:r.brand,value:Number(r.value),date:r.date,delivery:String(r.delivery||''),status:r.status==='paid'?'paid':'pending'}));for(const r of records){const y=Number(r.date.slice(0,4));if(y&&!$('year').querySelector(`option[value="${y}"]`))$('year').insertAdjacentHTML('beforeend',`<option value="${y}">${y}</option>`);}persist();alert('Backup restaurado.');}catch(err){alert('Não foi possível restaurar. Escolha um backup JSON válido.');}finally{e.target.value='';}};
+render();
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script>
+</body>
+</html>
